@@ -18,7 +18,7 @@ data class CurrencyConvertResponse (
     CurrencyResponse(
       from = from?.currency ?: "",
       to = to?.currency ?: "",
-      result = DecimalFormat("#.##").format(total),
-      rate = DecimalFormat("#.##").format(rate)
+      result = "${DecimalFormat("#.##").format(total)} ${to?.currency}",
+      rate = "${DecimalFormat("#.##").format(rate)} ${to?.currency}"
     )
 }

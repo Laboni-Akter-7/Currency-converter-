@@ -19,6 +19,6 @@ class SplashFragmentViewModel : ViewModel() {
     private fun startSplash() {
         Handler(Looper.getMainLooper()).postDelayed({
             _onSplashComplete.postValue(true)
-        }, 1500)
+        }, 2000)
     }
 }

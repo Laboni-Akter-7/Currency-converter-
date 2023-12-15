@@ -1,5 +1,6 @@
 package com.saadahmedev.currencyconverter.ui.root.tabs.home.viewmodel
 
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,9 +21,12 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(private val currencyConvertUseCase: CurrencyConvertUseCase) : ViewModel() {
 
     val currencyList = arrayListOf<CurrencyDto>()
+    val currencyMap = hashMapOf<String, String>()
+
     val fromCode = ObservableField("USD")
     val toCode = ObservableField("BDT")
     val amount = ObservableField<String>()
+    val isResultView = ObservableBoolean(false)
 
     private val _convertResponse = MutableLiveData<ResponseState<CurrencyResponse>>()
     val convertResponse: LiveData<ResponseState<CurrencyResponse>>
@@ -43,6 +47,7 @@ class HomeFragmentViewModel @Inject constructor(private val currencyConvertUseCa
                         name = currency.displayName
                     )
                 )
+                currencyMap[currency.currencyCode] = currency.displayName
             } catch (_: Exception) {}
         }
 

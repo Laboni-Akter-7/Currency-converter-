@@ -1,8 +1,8 @@
 package com.saadahmedev.currencyconverter.domain.model
 
 data class CurrencyResponse(
-    val from: String,
-    val to: String,
+    var from: String,
+    var to: String,
     val result: String,
     val rate: String
 )

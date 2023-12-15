@@ -1,7 +1,6 @@
 package com.saadahmedev.currencyconverter.ui.root.tabs.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.saadahmedev.currencyconverter.base.BaseFragment
@@ -42,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             .build(viewModel.currencyList)
 
         binding.etAmount.doAfterTextChanged {
-            if (it.toString().isNotEmpty()) binding.btnConvert.enable()
+            if (it.toString().isNotEmpty() && viewModel.fromCode.get() != viewModel.toCode.get()) binding.btnConvert.enable()
             else binding.btnConvert.disable()
         }
     }
@@ -51,13 +50,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         observe(viewModel.convertResponse) {
             when (it) {
                 is ResponseState.Loading -> {
+                    viewModel.isResultView.set(false)
                     progressDialog.show("Converting ${viewModel.amount.get()} ${viewModel.fromCode.get()} to ${viewModel.toCode.get()}")
                 }
                 is ResponseState.Success -> {
+                    binding.item = it.data.apply {
+                        this?.from = "${viewModel.currencyMap[this?.from]} (${this?.from})"
+                        this?.to = "${viewModel.currencyMap[this?.to]} (${this?.to})"
+                    }
                     progressDialog.dismiss()
+                    viewModel.isResultView.set(true)
                 }
                 is ResponseState.Error -> {
                     progressDialog.dismiss()
+                    viewModel.isResultView.set(false)
                     it.message.shortSnackBar()
                 }
             }
