@@ -1,5 +1,6 @@
 package com.saadahmedev.currencyconverter.base
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -16,9 +17,10 @@ abstract class BaseRecyclerAdapter<T: Any, VB: ViewDataBinding> : RecyclerView.A
 
     abstract fun onBind(binding: VB, item: T, position: Int)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(items: List<T>) {
         this.items = items as MutableList<T>
-        notifyItemRangeInserted(0, this.items.size)
+        notifyDataSetChanged()
     }
 
     fun addItemsAfter(items: List<T>) {

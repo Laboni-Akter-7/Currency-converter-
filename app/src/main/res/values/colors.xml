@@ -5,6 +5,7 @@
     <color name="colorGrey">#BABABA</color>
     <color name="colorLightGrey">#F1F1F1</color>
     <color name="colorDarkGrey">#2C2C2C</color>
+    <color name="colorOverDark">#494949</color>
 
     <color name="static_main">#27B56D</color>
     <color name="static_white">#FFFFFF</color>

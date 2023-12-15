@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_sheet"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/cubano"
+                android:shadowColor="@color/static_main"
+                android:shadowRadius="15"
+                android:text="CHOOSE A CURRENCY"
+                android:textColor="@color/static_main"
+                android:textSize="@dimen/_13ssp" />
+
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/ripple_circle_over_dark"
+                android:padding="@dimen/_7sdp"
+                android:rotation="-90"
+                android:src="@drawable/ic_back"
+                app:tint="@color/static_white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/cubano"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="UNABLE TO FIND?"
+            android:textColor="@color/static_white"
+            android:textSize="@dimen/_10ssp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:background="@drawable/bg_over_dark_5"
+            android:paddingHorizontal="@dimen/_10sdp">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/iv_search"
+                android:background="@color/colorOverDark"
+                android:fontFamily="@font/cubano"
+                android:hint="Search here..."
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/static_white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="@dimen/_11ssp" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_search"
+                app:tint="@color/static_white" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_20sdp"
+            android:clipToPadding="false"/>
+
+    </LinearLayout>
+
+</layout>

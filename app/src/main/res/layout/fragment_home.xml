@@ -1,14 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.root.tabs.home.HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="listener"
+            type="com.saadahmedev.currencyconverter.ui.root.tabs.home.listener.ButtonClickListener" />
+
+        <variable
+            name="viewmodel"
+            type="com.saadahmedev.currencyconverter.ui.root.tabs.home.viewmodel.HomeFragmentViewModel" />
+
+        <import type="com.saadahmedev.currencyconverter.ui.root.tabs.home.util.CurrencyChooserType"/>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/colorDarkGrey"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        tools:context=".ui.root.tabs.home.HomeFragment">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:fontFamily="@font/cubano"
+            android:text="@string/app_name"
+            android:textColor="@color/static_main"
+            android:textSize="@dimen/_18ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="0.85"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cubano"
+                    android:text="FROM"
+                    android:textColor="@color/static_white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/ripple_bg_main_5"
+                    android:fontFamily="@font/cubano"
+                    android:gravity="center"
+                    android:shadowColor="@color/static_white"
+                    android:shadowRadius="15"
+                    android:onClick="@{() -> listener.onCurrencyClicked(CurrencyChooserType.FROM)}"
+                    android:text="@{viewmodel.fromCode}"
+                    android:textColor="@color/static_white"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cubano"
+                    android:textColor="@color/static_white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/ripple_bg_blue_10"
+                    android:padding="@dimen/_7sdp"
+                    android:onClick="@{() -> listener.onExchangeClicked()}"
+                    android:src="@drawable/ic_exchange"
+                    app:tint="@color/static_white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="0.85"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cubano"
+                    android:text="TO"
+                    android:textColor="@color/static_white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/ripple_bg_main_5"
+                    android:fontFamily="@font/cubano"
+                    android:gravity="center"
+                    android:shadowColor="@color/static_white"
+                    android:shadowRadius="15"
+                    android:onClick="@{() -> listener.onCurrencyClicked(CurrencyChooserType.TO)}"
+                    android:text="@{viewmodel.toCode}"
+                    android:textColor="@color/static_white"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/cubano"
+            android:text="AMOUNT"
+            android:textColor="@color/static_white"
+            android:textSize="@dimen/_10ssp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/et_amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/btn_convert"
+                android:background="@drawable/bg_white_5"
+                android:fontFamily="@font/cubano"
+                android:hint="Enter amount..."
+                android:inputType="number|numberDecimal"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="@dimen/_11ssp" />
+
+            <TextView
+                android:id="@+id/btn_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ripple_bg_main_5"
+                android:fontFamily="@font/cubano"
+                android:gravity="center"
+                android:onClick="@{() -> listener.onConvertClicked()}"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:shadowColor="@color/static_white"
+                android:shadowRadius="15"
+                android:text="CONVERT"
+                android:textColor="@color/static_white"
+                android:textSize="@dimen/_10ssp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
