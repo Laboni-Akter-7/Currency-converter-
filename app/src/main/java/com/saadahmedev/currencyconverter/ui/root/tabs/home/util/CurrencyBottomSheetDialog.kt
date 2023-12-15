@@ -1,7 +1,6 @@
 package com.saadahmedev.currencyconverter.ui.root.tabs.home.util
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
@@ -42,7 +41,7 @@ class CurrencyBottomSheetDialog private constructor(
         bottomSheetDialog = BottomSheetDialog(context)
         this.currencyList = currencyList
 
-        binding = DataBindingUtil.inflate<DialogCurrencyChooserBinding>(
+        binding = DataBindingUtil.inflate(
             LayoutInflater.from(context),
             R.layout.dialog_currency_chooser,
             null,

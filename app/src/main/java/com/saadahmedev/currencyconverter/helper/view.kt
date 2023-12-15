@@ -42,6 +42,11 @@ fun View.disable() {
     this.alpha = 0.4.toFloat()
 }
 
+fun View.clickable(isEnable: () -> Boolean) {
+    if (isEnable.invoke()) this.enable()
+    else this.disable()
+}
+
 fun Context.setImageTint(iv: ImageView, color: Int) {
     iv.setColorFilter(ContextCompat.getColor(this, color), android.graphics.PorterDuff.Mode.SRC_IN)
 }

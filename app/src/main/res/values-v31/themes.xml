@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Theme.currencyconverter" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/static_main</item>
+        <item name="colorPrimaryVariant">@color/colorWhite</item>
+        <item name="colorOnPrimary">@color/colorDarkGrey</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/static_main</item>
+        <item name="colorSecondaryVariant">@color/colorWhite</item>
+        <item name="colorOnSecondary">@color/colorDarkGrey</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
+        <item name="android:windowSplashScreenBackground">@color/colorDarkGrey</item>
+    </style>
+</resources>

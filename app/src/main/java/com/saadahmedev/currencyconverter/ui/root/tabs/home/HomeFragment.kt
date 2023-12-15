@@ -6,8 +6,7 @@ import androidx.fragment.app.viewModels
 import com.saadahmedev.currencyconverter.base.BaseFragment
 import com.saadahmedev.currencyconverter.data.dto.CurrencyDto
 import com.saadahmedev.currencyconverter.databinding.FragmentHomeBinding
-import com.saadahmedev.currencyconverter.helper.disable
-import com.saadahmedev.currencyconverter.helper.enable
+import com.saadahmedev.currencyconverter.helper.clickable
 import com.saadahmedev.currencyconverter.helper.observe
 import com.saadahmedev.currencyconverter.listener.OnItemClickListener
 import com.saadahmedev.currencyconverter.ui.root.tabs.home.listener.ButtonClickListener
@@ -36,13 +35,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.listener = this
         binding.viewmodel = viewModel
         progressDialog = ProgressDialog.getInstance(requireContext())
-        binding.btnConvert.disable()
+        binding.btnConvert.clickable { false }
+
         currencyBottomSheetDialog = CurrencyBottomSheetDialog.getInstance(requireContext(), this)
             .build(viewModel.currencyList)
 
         binding.etAmount.doAfterTextChanged {
-            if (it.toString().isNotEmpty() && viewModel.fromCode.get() != viewModel.toCode.get()) binding.btnConvert.enable()
-            else binding.btnConvert.disable()
+            binding.btnConvert.clickable {
+                !viewModel.amount.get()
+                    .isNullOrBlank() && viewModel.fromCode.get() != viewModel.toCode.get()
+            }
         }
     }
 
@@ -53,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     viewModel.isResultView.set(false)
                     progressDialog.show("Converting ${viewModel.amount.get()} ${viewModel.fromCode.get()} to ${viewModel.toCode.get()}")
                 }
+
                 is ResponseState.Success -> {
                     binding.item = it.data.apply {
                         this?.from = "${viewModel.currencyMap[this?.from]} (${this?.from})"
@@ -61,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     progressDialog.dismiss()
                     viewModel.isResultView.set(true)
                 }
+
                 is ResponseState.Error -> {
                     progressDialog.dismiss()
                     viewModel.isResultView.set(false)
@@ -88,6 +92,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         when (chooserType) {
             CurrencyChooserType.FROM -> viewModel.fromCode.set(item.code)
             CurrencyChooserType.TO -> viewModel.toCode.set(item.code)
+        }
+
+        binding.btnConvert.clickable {
+            !viewModel.amount.get()
+                .isNullOrBlank() && viewModel.fromCode.get() != viewModel.toCode.get()
         }
     }
 }
