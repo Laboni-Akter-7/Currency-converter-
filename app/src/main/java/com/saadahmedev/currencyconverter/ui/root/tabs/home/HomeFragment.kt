@@ -16,6 +16,7 @@ import com.saadahmedev.currencyconverter.ui.root.tabs.home.util.CurrencyBottomSh
 import com.saadahmedev.currencyconverter.ui.root.tabs.home.util.CurrencyChooserType
 import com.saadahmedev.currencyconverter.ui.root.tabs.home.viewmodel.HomeFragmentViewModel
 import com.saadahmedev.currencyconverter.util.AppConstants.AppInfo.APP_NAME
+import com.saadahmedev.currencyconverter.util.ProgressDialog
 import com.saadahmedev.currencyconverter.util.ResponseState
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,11 +30,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel by viewModels<HomeFragmentViewModel>()
     private lateinit var currencyBottomSheetDialog: CurrencyBottomSheetDialog
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
         viewModel.start()
         binding.listener = this
         binding.viewmodel = viewModel
+        progressDialog = ProgressDialog.getInstance(requireContext())
         binding.btnConvert.disable()
         currencyBottomSheetDialog = CurrencyBottomSheetDialog.getInstance(requireContext(), this)
             .build(viewModel.currencyList)
@@ -48,13 +51,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         observe(viewModel.convertResponse) {
             when (it) {
                 is ResponseState.Loading -> {
-                    //
+                    progressDialog.show("Converting ${viewModel.amount.get()} ${viewModel.fromCode.get()} to ${viewModel.toCode.get()}")
                 }
                 is ResponseState.Success -> {
-                    Log.d("response_debug", "observeData: ${it.data}")
+                    progressDialog.dismiss()
                 }
                 is ResponseState.Error -> {
-                    Log.d("response_debug", "observeData: ${it.message}")
+                    progressDialog.dismiss()
+                    it.message.shortSnackBar()
                 }
             }
         }

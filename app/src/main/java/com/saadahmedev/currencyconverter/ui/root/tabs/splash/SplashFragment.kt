@@ -2,7 +2,6 @@ package com.saadahmedev.currencyconverter.ui.root.tabs.splash
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.saadahmedev.currencyconverter.R
 import com.saadahmedev.currencyconverter.base.BaseFragment
 import com.saadahmedev.currencyconverter.databinding.FragmentSplashBinding

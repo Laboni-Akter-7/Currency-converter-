@@ -15,7 +15,6 @@ import com.saadahmedev.currencyconverter.helper.navigate
 import com.saadahmedev.currencyconverter.helper.snackBar
 import com.saadahmedev.currencyconverter.helper.toast
 import com.saadahmedev.currencyconverter.ui.root.viewmodel.RootViewModel
-import com.saadahmedev.currencyconverter.util.ApiCall
 import com.saadahmedev.currencyconverter.util.SessionManager
 import com.saadahmedsoft.tinydb.TinyDB
 import retrofit2.Call
@@ -114,17 +113,5 @@ abstract class BaseFragment<BINDING: ViewBinding>(
 
     fun onBackPressed() {
         requireActivity().onBackPressedDispatcher.onBackPressed()
-    }
-
-    fun <T> Call<T>.getResponse(listener: ApiCall.OnResponseGet<T>) {
-        ApiCall.enqueue(requireContext(), this) {
-            listener.onSuccessful(it)
-        }
-    }
-
-    fun <T> Call<T>.getNoProgressResponse(listener: ApiCall.OnResponseGet<T>) {
-        ApiCall.enqueueNoProgress(requireContext(), this) {
-            listener.onSuccessful(it)
-        }
     }
 }

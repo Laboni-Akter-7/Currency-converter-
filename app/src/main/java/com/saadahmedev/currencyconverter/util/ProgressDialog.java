@@ -1,27 +1,33 @@
 package com.saadahmedev.currencyconverter.util;
 
 import android.content.Context;
+import android.widget.TextView;
+import com.saadahmedev.currencyconverter.R;
 
-import com.saadahmedsoft.popupdialog.PopupDialog;
-import com.saadahmedsoft.popupdialog.Styles;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class ProgressDialog {
 
-    private final PopupDialog popupDialog;
+    private final BottomSheetDialog bottomSheetDialog;
 
     private ProgressDialog(Context context) {
-        popupDialog = PopupDialog.getInstance(context);
+        bottomSheetDialog = new BottomSheetDialog(context);
     }
 
     public static ProgressDialog getInstance(Context context) {
         return new ProgressDialog(context);
     }
 
-    public void show() {
-        popupDialog.setStyle(Styles.PROGRESS).setCancelable(false).showDialog();
+    public void show(String message) {
+        bottomSheetDialog.setContentView(R.layout.dialog_loading);
+        TextView progressText = bottomSheetDialog.findViewById(R.id.tv_progress_message);
+        assert progressText != null;
+        progressText.setText(message);
+        bottomSheetDialog.setCancelable(false);
+        bottomSheetDialog.show();
     }
 
     public void dismiss() {
-        popupDialog.dismissDialog();
+        if (bottomSheetDialog.isShowing()) bottomSheetDialog.dismiss();
     }
 }

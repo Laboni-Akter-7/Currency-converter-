@@ -15,7 +15,6 @@ import com.saadahmedev.currencyconverter.helper.onClicked
 import com.saadahmedev.currencyconverter.helper.snackBar
 import com.saadahmedev.currencyconverter.helper.toast
 import com.saadahmedev.currencyconverter.ui.root.viewmodel.RootViewModel
-import com.saadahmedev.currencyconverter.util.ApiCall
 import retrofit2.Call
 
 abstract class BaseActivity<BINDING: ViewBinding>(private val bindingInflater: (inflater: LayoutInflater) -> BINDING) : AppCompatActivity() {
@@ -100,17 +99,5 @@ abstract class BaseActivity<BINDING: ViewBinding>(private val bindingInflater: (
 
     private fun showToast(message: String, duration: Int) {
         toast(this, message, duration)
-    }
-
-    fun <T> Call<T>.getResponse(listener: ApiCall.OnResponseGet<T>) {
-        ApiCall.enqueue(this@BaseActivity, this) {
-            listener.onSuccessful(it)
-        }
-    }
-
-    fun <T> Call<T>.getNoProgressResponse(listener: ApiCall.OnResponseGet<T>) {
-        ApiCall.enqueueNoProgress(this@BaseActivity, this) {
-            listener.onSuccessful(it)
-        }
     }
 }

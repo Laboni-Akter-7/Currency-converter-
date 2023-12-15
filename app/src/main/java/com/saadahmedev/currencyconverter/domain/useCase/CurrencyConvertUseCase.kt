@@ -1,6 +1,5 @@
 package com.saadahmedev.currencyconverter.domain.useCase
 
-import android.util.Log
 import com.saadahmedev.currencyconverter.domain.model.CurrencyResponse
 import com.saadahmedev.currencyconverter.domain.repository.CurrencyConverterRepository
 import com.saadahmedev.currencyconverter.util.ResponseState
@@ -16,8 +15,6 @@ class CurrencyConvertUseCase @Inject constructor(private val currencyConverterRe
         amount: String
     ): Flow<ResponseState<CurrencyResponse>> = flow {
         emit(ResponseState.Loading())
-
-        Log.d("response_debug", "invoke: $from $to $amount")
 
         try {
             emit(
