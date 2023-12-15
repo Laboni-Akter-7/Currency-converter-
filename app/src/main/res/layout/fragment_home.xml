@@ -156,6 +156,7 @@
                 android:background="@drawable/bg_white_5"
                 android:fontFamily="@font/cubano"
                 android:hint="Enter amount..."
+                android:text="@={viewmodel.amount}"
                 android:inputType="number|numberDecimal"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:textColor="@color/colorDarkGrey"
